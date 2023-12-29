@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<>
+<head>
+    <title>Магазин</title>
+    <style>
+        /* Стили для визуализации магазина */
+        .product {
+            border: 1px solid gray;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<>
+    <div id="products-container"></div>
+  
+    <script>
+        // Определение класса "Товар"
+        class Product {
+            constructor(name, price, imageUrl) {
+                this.name = name;
+                this.price = price;
+                this.imageUrl = imageUrl;
+            }
+
+            render() {
+                const productElement = document.createElement('div');
+                productElement.classList.add('product');
+
+                const nameElement = document.createElement('h2');
+                nameElement.textContent = this.name;
+                productElement.appendChild(nameElement);
+
+                const priceElement = document.createElement('p');
+                priceElement.textContent = `Цена: ${this.price} руб.`;
+                productElement.appendChild(priceElement);
+
+                const imageElement = document.createElement('img');
+                imageElement.src = this.imageUrl;
+                productElement.appendChild(imageElement);
+
+                return productElement;
+            }
+        }
+
+        // Создание экземпляров товаров и добавление их на страницу
+        const productsContainer = document.getElementById('products-container');
+
+        const product1 = new Product('Товар 1', 1000, 'image1.jpg');
+        const product2 = new Product('Товар 2', 2000, 'image2.jpg');
+        const product3 = new Product('Товар 3', 3000, 'image3.jpg');
+
+        productsContainer.appendChild(product1.render());
+        productsContainer.appendChild(product2.render());
+        productsContainer.appendChild(product3.render());
+    
+    class Cart {
+        constructor() {
+            this.products = [];
+        }
+    
+        addToCart(product) {
+            this.products.push(product);
+        }
+    
+        render() {
+            const cartElement = document.createElement('div');
+            cartElement.classList.add('cart');
+    
+            const titleElement = document.createElement('h2');
+            titleElement.textContent = 'Корзина';
+            cartElement.appendChild(titleElement);
+    
+            if (this.products.length === 0) {
+                const emptyElement = document.createElement('p');
+                emptyElement.textContent = 'Ваша корзина пуста';
+                cartElement.appendChild(emptyElement);
+            } else {
+                const productListElement = document.createElement('ul');
+                cartElement.appendChild(productListElement);
+    
+                this.products.forEach(product => {
+                    const productItemElement = document.createElement('li');
+                    productItemElement.textContent = product.name;
+                    productListElement.appendChild(productItemElement);
+                });
+            }
+            const cart = new Cart();
+            const cartContainer = document.getElementById('cart-container');
+            cartContainer.appendChild(cart.render());
+// Внесите изменения в метод render класса Product, чтобы добавить кнопку "Добавить в корзину"
+render()
+ {
+    // ...
+    const addToCartButton = document.createElement('button');
+    addToCartButton.textContent = 'Добавить в корзину';
+    addToCartButton.addEventListener('click', () => {
+        cart.addToCart(this);
+        cartContainer.innerHTML = ''; // Очистить контейнер с корзиной
+        cartContainer.appendChild(cart.render()); // Отрисовать корзину с обновленным списком товаров
+    });
+    productElement.appendChild(addToCartButton);
+    // ...
+}
+            
+            return cartElement;
+        }
+    }</script>
